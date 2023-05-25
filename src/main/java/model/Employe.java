@@ -1,37 +1,34 @@
 package model;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @AllArgsConstructor
 
 @NoArgsConstructor
+@Setter
+@Getter
+@Entity
+@ToString
 
+@Table(name="employe")
 public class Employe {
-    private  Integer id;
-    private String firstName;
-    private String lastName;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+   @Column
+    private String first_Name;
+   @Column
+    private String last_Name;
+   @Column
     private String gender;
     private Integer age;
-    private Integer cityId;
+    @Column(name="city_id")
+    private int city_Id;
 
-
-
-    public static Employe create(ResultSet resultSet) throws SQLException {
-        Employe employe = new Employe();
-        employe.setId(resultSet.getInt("id"));
-        employe.setFirstName(resultSet.getString("first_Name"));
-        employe.setLastName(resultSet.getString("last_Name"));
-        employe.setGender(resultSet.getString("gender"));//названия колонок
-        employe.setAge(resultSet.getInt("age"));
-        employe.setCityId(resultSet.getInt("city_id"));
-        return employe;
-    }
 
 
 }

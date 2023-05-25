@@ -1,56 +1,37 @@
+import dao.EmployeDao;
 import dao.EmployeDaoImpl;
-
-
-import java.sql.*;
+import model.Employe;
 
 public class Application {
-    public Application() {
-    }
+        public static void main(String[] args) {
+                EmployeDao employeDao = new EmployeDaoImpl();
+                Employe employe = new Employe();
 
-    public static void main(String[] args) throws SQLException {
-        String url = "jdbc:postgresql://localhost:5432/postgres";
-        String user = "postgres";
-        String password = "123456";
+                employe.setFirst_Name("Klim");
+                employe.setLast_Name("Iven");
+                employe.setGender("man");
+                employe.setAge(31);
+                employe.setCity_Id(2);
+                System.out.println(employe);
+                employeDao.save(employe);
+                System.out.println(employe);
 
-        //int query = 2;
+                System.out.println(employeDao.findById(21));
+                employeDao.deleteById((21));
+                System.out.println(employeDao.findById(21));
 
-        //try (Connection connection = DriverManager.getConnection(url, user, password);
-         //    PreparedStatement statement = connection.prepareStatement("SELECT*FROM employe WHERE id=  (?)")
-       // ) {
-        //    statement.setInt(1,query);
-        //    ResultSet resultSet = statement.executeQuery();
-        //    while (resultSet.next()) {
-         //       System.out.print("id: "+resultSet.getInt("id")+";first_name: "+resultSet.getString("first_name")
-          //      +"; last_name: "+resultSet.getString("last_name")+"; gender: "+resultSet.getString("gender")+"; age: "+resultSet.getInt("age")+"; city: "
-          //      +resultSet.getInt("city_id"));
-          //      System.out.println();
+                Employe byId=employeDao.findById(20);
+                byId.setFirst_Name("Jack");
+                byId.setLast_Name("Fill");
+                employeDao.update(byId);
+                System.out.println(employeDao.findById(20));
 
-
-         //   }
-
-       // } catch (SQLException e) {
-       //     throw new RuntimeException(e);
-
-        Connection conn= DriverManager.getConnection(url,user, password);
-        EmployeDaoImpl employeDao =new EmployeDaoImpl(conn);//создание экземпляра класса PostDaoImpl и в конструкор передается connection
-        System.out.println(employeDao.findById(5));
-
-       // employeDao.create(new Employe(6, "Pier","Petrov", "man", 30,2));
-        System.out.println(employeDao.findById(9));
-
-        //employeDao.deleteById(9);
-        //System.out.println(employeDao.findById(9));
-
-       employeDao.findAll().forEach(System.out::println);
-
-
-
-
+                employeDao.findAll().forEach(System.out::println);
 
 
 
 
         }
+}
 
 
-    }
