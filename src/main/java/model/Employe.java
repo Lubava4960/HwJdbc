@@ -19,16 +19,17 @@ public class Employe {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-   @Column
-    private String first_Name;
-   @Column
-    private String last_Name;
+   @Column(name = "first_name")
+    private String firstName;
+   @Column (name="last_Name")
+    private String lastName;
    @Column
     private String gender;
     private Integer age;
     @Column(name="city_id")
-    private int city_Id;
+    private int cityId;
 
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    private City city;
 
 }
