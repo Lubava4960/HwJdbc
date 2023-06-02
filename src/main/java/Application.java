@@ -16,7 +16,7 @@ public class Application {
             CityDao cityDao = new CityDaoImpl();
 
                 City city = new City();
-                city.setCity_name("TestTownes");
+                city.setCityName("TestTownes");
                 city.setEmploye(new ArrayList<>());
 
                 System.out.println(city);
@@ -33,16 +33,16 @@ public class Application {
                 employeDao.save(employe);
 
 
-                 City byId=cityDao.findByIdCity(1);
-                 byId.setCity_name("Volokolamsk");
+                 City byId=cityDao.findByIdCity(0);
+                 byId.setCityName("Volokolamsk");
                  cityDao.updateCity(byId);
                  cityDao.updateCity(city);
-                 System.out.println(cityDao.findByIdCity(1));
+                 System.out.println(cityDao.findByIdCity(0));
 
                  cityDao.findAllCity().forEach(System.out::println);
-                 cityDao.deleteById((0));
+                 cityDao.deleteById((1));
 
-                 System.out.println(cityDao.findByIdCity(26));
+                 System.out.println(cityDao.findByIdCity(1));
                  System.out.println(city);
 
                 //System.out.println(employe);
